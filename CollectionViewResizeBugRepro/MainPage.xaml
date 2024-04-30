@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:CollectionViewResizeBugRepro"
+             x:DataType="viewModel:MainPageViewModel"
+             x:Class="CollectionViewResizeBugRepro.MainPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="*, 35">
+        <CollectionView ItemsSource="{Binding TestCollection}" Grid.Row="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="*,10">
+                        <BoxView 
+                            HeightRequest="{Binding Path=BindingContext.BtnHeight, Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
+                            BackgroundColor="LightBlue" 
+                            Margin="20"/>
+                        <Border 
+                            HeightRequest="{Binding Path=BindingContext.BtnHeight, Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
+                            Stroke="Gray" 
+                            Margin="20"/>
+                        
+                        <BoxView Grid.Row="1" HeightRequest="1.5" BackgroundColor="Black" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Change Height" Grid.Row="1" Command="{Binding ChangeHeightCommand}"/>
+    </Grid>
+
+</ContentPage>
